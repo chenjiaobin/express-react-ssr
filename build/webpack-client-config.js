@@ -7,6 +7,7 @@ const { resolvePath } = require('./webpack-util')
 const baseConfig = require('./webpack-base')
 // 分离CSS为单独的问题
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = merge(baseConfig, {
   // 用于调试
@@ -56,6 +57,9 @@ module.exports = merge(baseConfig, {
       template: resolvePath("../template.html")
     }),
     // 注意：如果打包的时候报错，那重新npm install –save-dev extract-text-webpack-plugin@next安装一下，因为webpack版本较高，所以老版本的extract-text-webpack-plugin有问题
-    new ExtractTextPlugin('./css/[name]-[hash:8].css')
+    new ExtractTextPlugin('./css/[name]-[hash:8].css'),
+    new BundleAnalyzerPlugin({
+      analyzerPort: 90
+    })
   ]
 })
