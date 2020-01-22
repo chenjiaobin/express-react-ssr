@@ -17,9 +17,10 @@ export default class App extends Component {
 
   render () {
     return ( 
-        <div>
+        <div className={homecss.app}>
           <p className={homecss.home} onClick={this.toggle.bind(this)}>服务端渲染测试</p>
-          <ul>
+          <p>本项目地址：<a href="https://github.com/chenjiaobin/express-react-ssr">https://github.com/chenjiaobin/express-react-ssr</a></p>
+          <ul className={homecss.ul}>
             <li><Link to="/">首页</Link></li>
             <li><Link to="/parent">Parent</Link></li>
             <li><Link to="/child">child</Link></li>
