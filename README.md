@@ -161,7 +161,8 @@ ReactDom.render(<Home/>, document.getElementById('app'))
 ```
 5. 目前基本就可以正常打包`webpack --config build/webpack-client-config.js`，打包正常你会在根目录生成了一个dist目录，不正常的话自己再调试调试把，或者拉我的项目去看下，[传送门](https://github.com/chenjiaobin/express-react-ssr)
 6. 最后服务端渲染的时候要把render换成hydrate，两个的主要区别如下
-> ReactDom.render()会将后端返回的dom节点所有子节点全部清除，再重新生成子节点。而ReactDom.hydrate()则会复用dom节点的子节点，将其与virtualDom关联
+> ReactDom.render()会将后端返回的dom节点所有子节点全部清除，即彻底抛弃服务端的节点，再重新生成子节点。而ReactDom.hydrate()则会复用dom节点的子节点，将其与virtualDom关联。同时hydrate也有个副作用，即当服务端和客户端的结果不一致的时候，就会focus到不一致的节点上，这就导致我们加载页面的时候，页面自动滚动到不一致的节点上。
+
 
 可见，第一种方式明显是做了重复工，影响效率，因此，react16版本也放弃了用render，也可能将会在react17版本中不能用ReactDOM.render()去混合服务端渲染出来的标签
 
